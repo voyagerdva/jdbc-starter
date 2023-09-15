@@ -4,7 +4,7 @@ import nn.ru.jdbc.starter.util.ConnectionManager;
 import org.postgresql.Driver;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -13,12 +13,8 @@ public class JdbcRunner {
         Class<Driver> driverClass = Driver.class;
 
         String sql = """
-                CREATE TABLE IF NOT EXISTS info (
-                    id SERIAL PRIMARY KEY ,
-                    data TEXT NOT NULL
-                    
-                )
-                                
+                SELECT *
+                FROM ticket  
                 """;
 
         try (Connection connection = ConnectionManager.open();
@@ -26,7 +22,8 @@ public class JdbcRunner {
              ) {
             System.out.println(connection.getSchema());
             System.out.println(connection.getTransactionIsolation());
-            boolean executeResult = statement.execute(sql);
+
+            ResultSet executeResult = statement.executeQuery(sql);
             System.out.println(executeResult);
         }
     }
