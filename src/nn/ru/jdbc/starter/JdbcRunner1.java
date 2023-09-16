@@ -12,7 +12,7 @@ import java.util.List;
 public class JdbcRunner1 {
     public static void main(String[] args) throws SQLException {
 
-        String flightId = "2";
+        String flightId = "2 OR 1 = 1";
         List<Long> result = getTicketsByFlightId(flightId);
         System.out.println(result);
 
