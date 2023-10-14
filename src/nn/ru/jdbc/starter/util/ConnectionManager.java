@@ -50,14 +50,17 @@ public final class ConnectionManager {
     }
     private static Connection open() {
         try {
+            System.out.println("ku ku");
             return DriverManager.getConnection(
                     PropertiesUtil.get(URL_KEY),
                     PropertiesUtil.get(USERNAME_KEY),
                     PropertiesUtil.get(PASSWORD_KEY)
+
             );
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     private static void loadDriver() {
