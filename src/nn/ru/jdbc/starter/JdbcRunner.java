@@ -12,10 +12,10 @@ public class JdbcRunner {
 
         String sql = """
                 SELECT *
-                FROM ticket  
+                FROM ticket
                 """;
 
-        try (Connection connection = ConnectionManager.open();
+        try (Connection connection = ConnectionManager.get();
              Statement statement = connection.createStatement();
         ) {
             System.out.println(connection.getSchema());

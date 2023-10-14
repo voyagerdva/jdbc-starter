@@ -21,7 +21,7 @@ public class JdbcRunner2 {
     }
 
     private static void checkMetaData() throws SQLException {
-        try (Connection connection = ConnectionManager.open()) {
+        try (Connection connection = ConnectionManager.get()) {
             DatabaseMetaData metaData = connection.getMetaData();
 
             ResultSet catalogs = metaData.getCatalogs();
@@ -52,7 +52,7 @@ public class JdbcRunner2 {
 
         ArrayList<Long> result = new ArrayList<>();
         
-        try (Connection connection = ConnectionManager.open();
+        try (Connection connection = ConnectionManager.get();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
             preparedStatement.setFetchSize(50);
             preparedStatement.setQueryTimeout(10);
@@ -86,7 +86,7 @@ public class JdbcRunner2 {
 
         ArrayList<Long> result = new ArrayList<>();
 
-        try (Connection connection = ConnectionManager.open();
+        try (Connection connection = ConnectionManager.get();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, flightId);
 
