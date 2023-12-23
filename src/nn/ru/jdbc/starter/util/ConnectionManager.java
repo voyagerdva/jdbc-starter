@@ -22,6 +22,14 @@ public final class ConnectionManager {
         initConnectionPool();
     }
 
+    private static void loadDriver() {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ConnectionManager() {
     }
 
@@ -39,7 +47,6 @@ public final class ConnectionManager {
             pool.add(proxyConnection);
         }
     }
-
     public static Connection get() {
         try {
             return pool.take();
@@ -48,6 +55,7 @@ public final class ConnectionManager {
 
         }
     }
+
     private static Connection open() {
         try {
             return DriverManager.getConnection(
@@ -60,13 +68,5 @@ public final class ConnectionManager {
             throw new RuntimeException(e);
         }
 
-    }
-
-    private static void loadDriver() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
